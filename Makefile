@@ -9,6 +9,9 @@ service-up: ## Build and run service
 service-run: ## Run service
 	sudo docker-compose -f ${DOCKER_COMPOSE_FILE} up
 
+service-down: ## Stop service
+	sudo docker-compose -f ${DOCKER_COMPOSE_FILE} down
+
 shell-postgres: ## Enter to database console
 	sudo docker-compose -f ${DOCKER_COMPOSE_FILE} exec db psql -U postgres -d user_service_db
 
@@ -20,3 +23,6 @@ migration-up: ## Run migrations UP
 
 migration-down: ## Rollback migrations
 	migrate -path db/migrations -database ${POSTGRES_DB_URI} down
+
+
+.PHONY: service-up service-run service-down shell-postgres migration-create-user migration-up migration-down
